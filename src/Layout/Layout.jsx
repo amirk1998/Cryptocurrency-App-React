@@ -1,4 +1,3 @@
-import Navbar from '../components/NavBar/NavBar';
 import Navigation from '../components/Navigation/Navigation';
 
 const Layout = ({ children }) => {
