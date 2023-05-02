@@ -1,6 +1,9 @@
 import Layout from '../../Layout/Layout';
 import millify from 'millify';
 import { useGetCryptosQuery } from '../../services/cryptoApi';
+import { Link } from 'react-router-dom';
+import Cryptocurrencies from '../../components/Cryptocurrencies/Cryptocurrencies';
+import News from '../../components/News/News';
 
 const HomePage = () => {
   const { data, isFetching } = useGetCryptosQuery();
@@ -47,7 +50,29 @@ const HomePage = () => {
           </div>
         </div>
         {/*  */}
-        <div></div>
+        <div className='mt-10 mb-4 flex items-center justify-between'>
+          <h1 className='text-2xl font-semibold '>
+            Top 10 Cryptocurrencies in the world
+          </h1>
+          <Link
+            to='/cryptocurrencies'
+            className='text-blue-500 hover:text-blue-700 font-medium text-base'
+          >
+            Show more
+          </Link>
+        </div>
+        <Cryptocurrencies />
+
+        <div className='mt-10 mb-4 flex items-center justify-between'>
+          <h1 className='text-2xl font-semibold '>Latest Crypto News</h1>
+          <Link
+            to='/news'
+            className='text-blue-500 hover:text-blue-700 font-medium text-base'
+          >
+            Show more
+          </Link>
+        </div>
+        <News />
       </div>
     </Layout>
   );
