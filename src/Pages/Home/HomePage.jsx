@@ -6,10 +6,10 @@ import Cryptocurrencies from '../../components/Cryptocurrencies/Cryptocurrencies
 import News from '../../components/News/News';
 
 const HomePage = () => {
-  const { data, isFetching } = useGetCryptosQuery();
+  const { data, isFetching } = useGetCryptosQuery(10);
   console.log(data);
 
-  const globalStats = data?.data?.stats;
+  const globalStats = data ? data?.data?.stats : '';
 
   {
     isFetching && <p>Loading...</p>;
@@ -21,53 +21,67 @@ const HomePage = () => {
         <h1 className='text-3xl font-semibold'>Global Crypto State</h1>
         <div className='grid grid-cols-2 w-full mt-4 px-4 gap-y-4'>
           <div className='flex flex-col gap-y-1'>
-            <p className='text-neutral-400 text-base'>Total Cryptocurrencies</p>
-            <p className='text-neutral-800 text-xl'>{globalStats.total}</p>
+            <p className='text-neutral-400 text-sm lg:text-base'>
+              Total Cryptocurrencies
+            </p>
+            <p className='text-neutral-800 text-lg lg:text-xl'>
+              {globalStats.total}
+            </p>
           </div>
           <div className='flex flex-col gap-y-1'>
-            <p className='text-neutral-400 text-base'>Total Exchanges</p>
-            <p className='text-neutral-800 text-xl'>
+            <p className='text-neutral-400 text-sm lg:text-base'>
+              Total Exchanges
+            </p>
+            <p className='text-neutral-800 text-lg lg:text-xl'>
               {millify(globalStats.totalExchanges, { space: true })}
             </p>
           </div>
           <div className='flex flex-col gap-y-1'>
-            <p className='text-neutral-400 text-base'>Total Market Cap</p>
-            <p className='text-neutral-800 text-xl'>
+            <p className='text-neutral-400 text-sm lg:text-base'>
+              Total Market Cap
+            </p>
+            <p className='text-neutral-800 text-lg lg:text-xl'>
               {millify(globalStats.totalMarketCap, { space: true })} $
             </p>
           </div>
           <div className='flex flex-col gap-y-1'>
-            <p className='text-neutral-400 text-base'>Total 24h Volume</p>
-            <p className='text-neutral-800 text-xl'>
+            <p className='text-neutral-400 text-sm lg:text-base'>
+              Total 24h Volume
+            </p>
+            <p className='text-neutral-800 text-lg lg:text-xl'>
               {millify(globalStats.total24hVolume, { space: true })} $
             </p>
           </div>
           <div className='flex flex-col gap-y-1'>
-            <p className='text-neutral-400 text-base'>Total Markets</p>
-            <p className='text-neutral-800 text-xl'>
+            <p className='text-neutral-400 text-sm lg:text-base'>
+              Total Markets
+            </p>
+            <p className='text-neutral-800 text-lg lg:text-xl'>
               {millify(globalStats.totalMarkets, { space: true })} $
             </p>
           </div>
         </div>
         {/*  */}
-        <div className='mt-10 mb-4 flex items-center justify-between'>
-          <h1 className='text-2xl font-semibold '>
-            Top 10 Cryptocurrencies in the world
+        <div className='mt-10 mb-4 flex items-center justify-between pr-6'>
+          <h1 className='text-lg lg:text-2xl font-semibold '>
+            Top 10 Cryptocurrencies
           </h1>
           <Link
             to='/cryptocurrencies'
-            className='text-blue-500 hover:text-blue-700 font-medium text-base'
+            className='text-blue-500 hover:text-blue-700 font-medium text-sm lg:text-base'
           >
             Show more
           </Link>
         </div>
-        <Cryptocurrencies />
+        <Cryptocurrencies isSimplified={true} />
 
-        <div className='mt-10 mb-4 flex items-center justify-between'>
-          <h1 className='text-2xl font-semibold '>Latest Crypto News</h1>
+        <div className='mt-10 mb-4 flex items-center justify-between pr-6'>
+          <h1 className='text-lg lg:text-2xl font-semibold '>
+            Latest Crypto News
+          </h1>
           <Link
             to='/news'
-            className='text-blue-500 hover:text-blue-700 font-medium text-base'
+            className='text-blue-500 hover:text-blue-700 font-medium text-sm lg:text-base'
           >
             Show more
           </Link>
