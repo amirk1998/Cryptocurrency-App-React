@@ -12,7 +12,9 @@ const HomePage = () => {
   const globalStats = data ? data?.data?.stats : '';
 
   {
-    isFetching && <p>Loading...</p>;
+    isFetching && (
+      <h1 className='text-slate-800 font-semibold text-center'>Loading...</h1>
+    );
   }
 
   return (
