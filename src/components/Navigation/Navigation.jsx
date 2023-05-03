@@ -36,7 +36,7 @@ const Navigation = () => {
   return (
     <div>
       {/* Medium & Large Screens */}
-      <div className='bg-slate-700 h-screen hidden md:w-64 lg:w-[300px] pt-4 md:flex flex-col px-4 rounded-tr-2xl mr-2'>
+      <div className='bg-slate-700 h-screen hidden md:w-64 lg:w-[300px] pt-4 md:flex flex-col px-4 rounded-tr-2xl '>
         <div className='flex items-center text-white gap-x-2 mb-8'>
           <img className='w-8 h-8' src={logo} alt='Logo' />
           <Link to='/'>

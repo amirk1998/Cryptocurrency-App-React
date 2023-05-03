@@ -11,12 +11,12 @@ const Footer = () => {
       text: 'Exchanges',
     },
     {
-      to: '/nes',
+      to: '/news',
       text: 'News',
     },
   ];
   return (
-    <footer className='bg-slate-700 w-full h-[86px] fixed bottom-0'>
+    <footer className='bg-slate-700 w-full h-24 mt-6 pb-4'>
       <div className='flex flex-col items-center '>
         <p className='text-white font-semibold text-xl'>Crypto Master</p>
         <p className='text-white text-lg'>All Rights Reserved</p>

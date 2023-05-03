@@ -2,7 +2,6 @@ import millify from 'millify';
 import { Link } from 'react-router-dom';
 import { useGetCryptosQuery } from '../../services/cryptoApi';
 import { useEffect, useState } from 'react';
-import Layout from '../../Layout/Layout';
 
 const Cryptocurrencies = ({ isSimplified }) => {
   const count = isSimplified ? 10 : 100;
@@ -66,7 +65,7 @@ const Cryptocurrencies = ({ isSimplified }) => {
       )}
 
       {/* Crypto List */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-6 px-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-6 px-4 overflow-y-auto'>
         {cryptos &&
           cryptos.map((currency) => {
             return (
