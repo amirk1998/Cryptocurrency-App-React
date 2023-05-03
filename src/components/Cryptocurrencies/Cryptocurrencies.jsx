@@ -27,7 +27,7 @@ const Cryptocurrencies = ({ isSimplified }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
-  console.log(cryptos);
+  // console.log(cryptos);
 
   if (isFetching)
     return (

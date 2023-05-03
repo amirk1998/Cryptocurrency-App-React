@@ -7,7 +7,7 @@ import News from '../../components/News/News';
 
 const HomePage = () => {
   const { data, isFetching } = useGetCryptosQuery(10);
-  console.log(data);
+  // console.log(data);
 
   const globalStats = data ? data?.data?.stats : '';
 
@@ -35,7 +35,7 @@ const HomePage = () => {
               Total Exchanges
             </p>
             <p className='text-neutral-800 text-lg lg:text-xl'>
-              {millify(globalStats.totalExchanges, { space: true })}
+              {globalStats.totalExchanges}
             </p>
           </div>
           <div className='flex flex-col gap-y-1'>
@@ -88,7 +88,7 @@ const HomePage = () => {
             Show more
           </Link>
         </div>
-        <News />
+        <News isSimplified={true} />
       </div>
     </Layout>
   );

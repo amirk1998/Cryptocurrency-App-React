@@ -1,9 +1,10 @@
 import Layout from '../../Layout/Layout';
+import News from '../../components/News/News';
 
 const NewsPage = () => {
   return (
     <Layout>
-      <h1>News Page</h1>
+      <News />
     </Layout>
   );
 };
