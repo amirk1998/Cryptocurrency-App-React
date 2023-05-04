@@ -26,7 +26,7 @@ const Cryptocurrencies = ({ isSimplified }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
-  // console.log(cryptos);
+  console.log(cryptos);
 
   if (isFetching)
     return (
@@ -70,8 +70,8 @@ const Cryptocurrencies = ({ isSimplified }) => {
           cryptos.map((currency) => {
             return (
               <div key={currency.uuid}>
-                <Link to={`/crypto/${currency.rank}`} className=''>
-                  <div className='border border-slate-200 rounded-xl hover:shadow-2xl hover:border-slate-400 py-4 w-full h-64'>
+                <Link to={`/crypto/${currency.rank}`}>
+                  <div className='border border-slate-200 rounded-xl hover:shadow-2xl hover:border-slate-400 py-4 w-full h-72 lg:h-64'>
                     <h5 className='mb-8 text-lg font-medium border-b-2 border-slate-200 tracking-tight text-gray-800 dark:text-white flex items-center justify-between w-full pb-4 px-4'>
                       {`${currency.rank}. ${currency.name}`}
                       <img
