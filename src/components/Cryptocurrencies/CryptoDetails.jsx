@@ -1,8 +1,10 @@
-import HTMLReactParser from 'html-react-parser';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { useGetCryptoDetailsQuery } from '../../services/cryptoApi';
-import axios from 'axios';
+import { useState } from 'react';
+import {
+  useGetCryptoDetailsQuery,
+  useGetCryptoHistoryQuery,
+} from '../../services/cryptoApi';
+import LineChart from '../LineChart/LineChart';
 import millify from 'millify';
 import Select from 'react-select';
 import {
@@ -21,7 +23,12 @@ const CryptoDetails = () => {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState('7d');
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
-  console.log(data);
+  const { data: coinHistory } = useGetCryptoHistoryQuery({
+    coinId,
+    timePeriod,
+  });
+  console.log(coinHistory);
+  // console.log(data);
 
   const cryptoDetails = data && data.data.coin;
 
@@ -135,7 +142,15 @@ const CryptoDetails = () => {
         />
       </div>
       {/* Line Chart (Will Do later) */}
+      <LineChart
+        coinHistory={coinHistory}
+        currentPrice={millify(cryptoDetails.price, { space: true })}
+        coinName={cryptoDetails.name}
+      />
       <div className='grid grid-cols-2 gap-x-12 mt-4'>
+        <p className='font-semibold text-slate-800 text-3xl col-span-2 mb-4'>
+          Details
+        </p>
         {/* Stats */}
         <div className='flex flex-col'>
           <div className='flex flex-col items-center'>
