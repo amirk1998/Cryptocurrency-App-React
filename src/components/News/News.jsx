@@ -25,25 +25,26 @@ const News = ({ isSimplified }) => {
   // const demoImage =
   //   'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
 
-  console.log(cryptoNews);
   return (
     <div className='flex flex-col overflow-y-auto '>
       {/* <Select */}
-      <div className='mt-4 px-8 w-1/2 mb-8'>
-        <Select
-          className='basic-single'
-          classNamePrefix='select'
-          defaultValue={newsCategory}
-          isDisabled={false}
-          isLoading={true}
-          isClearable={true}
-          isRtl={false}
-          isSearchable={true}
-          name='newsCategory'
-          options={selectOptions}
-          onChange={(selectOption) => setNewsCategory(selectOption.value)}
-        />
-      </div>
+      {!isSimplified && (
+        <div className='mt-4 px-8 w-1/2 lg:w-1/4 mb-8'>
+          <Select
+            className='basic-single'
+            classNamePrefix='select'
+            defaultValue={newsCategory}
+            isDisabled={false}
+            isLoading={true}
+            isClearable={true}
+            isRtl={false}
+            isSearchable={true}
+            name='newsCategory'
+            options={selectOptions}
+            onChange={(selectOption) => setNewsCategory(selectOption.value)}
+          />
+        </div>
+      )}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-x-8 gap-y-6 px-4'>
         {cryptoNews &&
           cryptoNews.value.map((news) => {
@@ -62,7 +63,10 @@ const News = ({ isSimplified }) => {
                   />
                   <div className='lg:h-48'>
                     <h5 className='text-base lg:text-lg font-medium text-gray-800 mb-2'>
-                      {news.name}
+                      {/* {news.name} */}
+                      {news.name.length > 80
+                        ? `${news.name.substring(0, 80)}...`
+                        : news.name}
                     </h5>
 
                     <p className='font-normal text-gray-700 dark:text-gray-400 mt-4'>
