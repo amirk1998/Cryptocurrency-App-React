@@ -135,7 +135,7 @@ const CryptoDetails = () => {
         />
       </div>
       {/* Line Chart (Will Do later) */}
-      <div className='grid grid-cols-2 items-center gap-x-12 mt-4'>
+      <div className='grid grid-cols-2 gap-x-12 mt-4'>
         {/* Stats */}
         <div className='flex flex-col'>
           <div className='flex flex-col items-center'>
@@ -187,40 +187,38 @@ const CryptoDetails = () => {
           })}
         </div>
         {/* Coin Description */}
-        <div className='col-span-2 mt-8 px-8'>
-          <div className='grid grid-cols-3 gap-x-4'>
-            <div className='col-span-1 px-4'>
-              <p className='text-3xl font-semibold text-slate-800 mb-4'>
-                What is {cryptoDetails.name} ?
-              </p>
-              <p>{cryptoDetails.description}</p>
-              {/* Button Read more */}
-              <button className='mt-4 px-8 py-4 bg-stone-100 rounded-xl text-slate-800 hover:bg-stone-300'>
-                <a href={`${cryptoDetails.coinrankingUrl}/about`}>
-                  Read more about {cryptoDetails.name}
-                </a>
-              </button>
-            </div>
-            <div className='flex flex-col mt-4 col-span-2'>
-              <p className='font-semibold text-slate-800 text-2xl'>
-                {cryptoDetails.name} Links
-              </p>
-              {cryptoDetails.links.map((link) => {
-                return (
-                  <div
-                    key={crypto.randomUUID()}
-                    className='flex items-center justify-between py-6 px-8 border-b border-b-slate-200 hover:shadow-2xl mt-4'
-                  >
-                    <p>{link.type}</p>
-                    <p className='font-semibold text-blue-500 hover:text-blue-700'>
-                      <a href={link.url}>{link.name}</a>
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+        <div className='flex flex-col mt-8 '>
+          <p className='font-semibold text-slate-800 text-3xl'>
+            {cryptoDetails.name} Links
+          </p>
+          {cryptoDetails.links.map((link) => {
+            return (
+              <div
+                key={crypto.randomUUID()}
+                className='flex items-center justify-between py-6 px-8 border-b border-b-slate-200 hover:shadow-2xl mt-4'
+              >
+                <p>{link.type}</p>
+                <p className='font-semibold text-blue-500 hover:text-blue-700'>
+                  <a href={link.url}>{link.name}</a>
+                </p>
+              </div>
+            );
+          })}
         </div>
+        <div className='px-4 flex flex-col mt-8'>
+          <p className='text-3xl font-semibold text-slate-800 mb-4'>
+            What is {cryptoDetails.name} ?
+          </p>
+          <p>{cryptoDetails.description}</p>
+          {/* Button Read more */}
+          <button className='mt-8 px-8 py-4 bg-stone-100 rounded-xl text-slate-800 hover:bg-stone-300'>
+            <a href={`${cryptoDetails.coinrankingUrl}/about`}>
+              Read more about {cryptoDetails.name}
+            </a>
+          </button>
+        </div>
+
+        {/*  */}
       </div>
     </div>
   );
