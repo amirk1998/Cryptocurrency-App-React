@@ -10,7 +10,9 @@ const CryptoPage = () => {
           <h1 className='text-3xl font-semibold mb-8'>All Cryptocurrencies</h1>
           <Cryptocurrencies />
         </div>
-        <Footer />
+        <div className='hidden md:block'>
+          <Footer />
+        </div>
       </div>
     </Layout>
   );

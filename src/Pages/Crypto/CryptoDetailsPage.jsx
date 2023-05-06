@@ -10,7 +10,9 @@ const CryptoDetailsPage = () => {
           {/* <h1 className='text-3xl font-semibold mb-4'>Crypto Details</h1> */}
           <CryptoDetails />
         </div>
-        <Footer />
+        <div className='hidden md:block'>
+          <Footer />
+        </div>
       </div>
     </Layout>
   );

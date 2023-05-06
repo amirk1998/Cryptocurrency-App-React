@@ -22,6 +22,7 @@ const News = ({ isSimplified }) => {
     }));
 
   const demoImage = '/src/assets/images/demoImage.jpg';
+  const emptyImage = '/src/assets/images/empty.png';
   // const demoImage =
   //   'https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News';
 
@@ -45,7 +46,7 @@ const News = ({ isSimplified }) => {
           />
         </div>
       )}
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-x-8 gap-y-6 px-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-x-8 gap-y-6 px-4 '>
         {cryptoNews &&
           cryptoNews.value.map((news) => {
             return (
@@ -55,7 +56,7 @@ const News = ({ isSimplified }) => {
                 rel='noreferrer'
                 key={crypto.randomUUID()}
               >
-                <div className='flex flex-col w-full px-4 border border-slate-200 rounded-xl hover:shadow-2xl hover:border-slate-400 py-4 '>
+                <div className='flex flex-col items-center md:items-start w-full px-4 border border-slate-200 rounded-xl hover:shadow-2xl hover:border-slate-400 py-4 '>
                   <img
                     className='w-60 h-60 lg:w-72 lg:h-72 rounded-lg mb-2'
                     src={news?.image?.thumbnail?.contentUrl || demoImage}
@@ -81,7 +82,7 @@ const News = ({ isSimplified }) => {
                         className='rounded-full w-8 h-8'
                         src={
                           news?.provider[0]?.image?.thumbnail?.contentUrl ||
-                          demoImage
+                          emptyImage
                         }
                       />
                       <p className='font-normal text-xs text-gray-700'>
@@ -99,7 +100,11 @@ const News = ({ isSimplified }) => {
             );
           })}
       </div>
-      {!isSimplified && <Footer />}
+      {!isSimplified && (
+        <div className='hidden md:block'>
+          <Footer />
+        </div>
+      )}
     </div>
   );
 };

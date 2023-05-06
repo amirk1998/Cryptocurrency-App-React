@@ -92,7 +92,9 @@ const HomePage = () => {
           </div>
           <News isSimplified={true} />
         </div>
-        <Footer />
+        <div className='hidden md:block'>
+          <Footer />
+        </div>
       </div>
     </Layout>
   );
