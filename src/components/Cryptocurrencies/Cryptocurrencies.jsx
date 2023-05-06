@@ -82,14 +82,14 @@ const Cryptocurrencies = ({ isSimplified }) => {
                     </h5>
                     <div className='flex flex-col gap-y-6 px-4'>
                       <p className='font-normal text-gray-700 dark:text-gray-400'>
-                        Price: {millify(currency.price, { space: true })}$
+                        Price: ${millify(currency.price, { space: true })}
                       </p>
                       <p className='font-normal text-gray-700 dark:text-gray-400'>
-                        Market Cap:{' '}
-                        {millify(currency.marketCap, { space: true })}$
+                        <span className='mr-1'>Market Cap:</span> $
+                        {millify(currency.marketCap, { space: true })}
                       </p>
                       <p className='font-normal text-gray-700 dark:text-gray-400'>
-                        Daily Change:{' '}
+                        <span className='mr-2'>Daily Change:</span>
                         {millify(currency.change, { space: true })}%
                       </p>
                     </div>

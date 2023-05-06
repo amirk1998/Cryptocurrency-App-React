@@ -6,7 +6,6 @@ import {
 } from '../../services/cryptoApi';
 import LineChart from '../LineChart/LineChart';
 import millify from 'millify';
-import Select from 'react-select';
 import {
   AiOutlineMoneyCollect,
   AiOutlineDollarCircle,
@@ -32,7 +31,7 @@ const CryptoDetails = () => {
 
   const cryptoDetails = data && data.data.coin;
 
-  const time = ['3h', '24h', '7d', '30d', '3M', '1y', '3y', '5y'];
+  const time = ['3h', '24h', '7d', '30d', '3m', '1y', '3y', '5y'];
   const timeOptions = time.map((t) => ({ label: t, value: t }));
 
   const stats = [
@@ -127,25 +126,26 @@ const CryptoDetails = () => {
         statistics, market cap and supply.
       </p>
       <div className='w-1/4 mt-4'>
-        <Select
-          className='basic-single'
-          classNamePrefix='select'
-          defaultValue={timePeriod}
-          isDisabled={false}
-          isLoading={false}
-          isClearable={false}
-          isRtl={false}
-          isSearchable={false}
-          name='timeSelect'
-          options={timeOptions}
-          onChange={(selectOption) => setTimePeriod(selectOption.value)}
-        />
+        <select
+          value={timePeriod}
+          onChange={(e) => setTimePeriod(e.target.value)}
+          className='bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 '
+        >
+          {timeOptions.map((t) => {
+            return (
+              <option value={t.value} key={t.value}>
+                {t.label}
+              </option>
+            );
+          })}
+        </select>
       </div>
       {/* Line Chart (Will Do later) */}
       <LineChart
         coinHistory={coinHistory}
         currentPrice={millify(cryptoDetails.price, { space: true })}
         coinName={cryptoDetails.name}
+        timePeriod={timePeriod}
       />
       <div className='grid grid-cols-2 gap-x-12 mt-4'>
         <p className='font-semibold text-slate-800 text-3xl col-span-2 mb-4'>
