@@ -26,8 +26,6 @@ const CryptoDetails = () => {
     coinId,
     timePeriod,
   });
-  console.log(coinHistory);
-  // console.log(data);
 
   const cryptoDetails = data && data.data.coin;
 
