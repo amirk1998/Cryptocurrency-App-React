@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const Exchange = () => {
   const apiKey = import.meta.env.VITE_CRYPTO_EXCHANGES_API_KEY;
+  const [metaData, setMetaData] = useState([]);
   const exchangeData = [
     { id: 270, name: 'binance', rank: 1 },
     { id: 89, name: 'coinbase', rank: 2 },
@@ -31,10 +32,45 @@ const Exchange = () => {
   useEffect(() => {
     fetch(`/api/exchange?ids=${exchangeId}`)
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        const sortedMetaData = [...data].sort((a, b) => {
+          return exchangeId.indexOf(a.id[id]) - exchangeId.indexOf(b.id[id]);
+        });
+        setMetaData(sortedMetaData);
+        console.log(sortedMetaData);
+      })
       .catch((error) => console.error(error));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const exchanges = [
+    { id: 70, name: 'bitstamp', rank: 6 },
+    { id: 102, name: 'huobi', rank: 14 },
+    { id: 139, name: 'bitflyer', rank: 12 },
+    { id: 200, name: 'bithumb', rank: 15 },
+    { id: 24, name: 'kraken', rank: 3 },
+    { id: 302, name: 'gate.io', rank: 9 },
+    { id: 37, name: 'bitfinex', rank: 8 },
+    { id: 1149, name: 'crypto.com', rank: 19 },
+    { id: 106, name: 'coincheck', rank: 18 },
+    { id: 513, name: 'bitget', rank: 10 },
+    { id: 294, name: 'okx', rank: 7 },
+    { id: 630, name: 'binance.us', rank: 11 },
+    { id: 333, name: 'lbank', rank: 13 },
+    { id: 544, name: 'mexc', rank: 17 },
+    { id: 331, name: 'kucoin', rank: 4 },
+    { id: 89, name: 'coinbase', rank: 2 },
+    { id: 270, name: 'binance', rank: 1 },
+    { id: 521, name: 'bybit', rank: 5 },
+    { id: 403, name: 'bitforex', rank: 20 },
+    { id: 151, name: 'gemini', rank: 16 },
+  ];
+
+  const sortedExchanges = [...exchanges].sort((a, b) => {
+    return exchangeId.indexOf(a.id) - exchangeId.indexOf(b.id);
+  });
+
+  console.log(sortedExchanges);
 
   return (
     <div>
