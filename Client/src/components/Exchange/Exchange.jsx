@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import ExchangeDetails from './ExchangeDetails';
+import millify from 'millify';
 
 const Exchange = () => {
-  const apiKey = import.meta.env.VITE_CRYPTO_EXCHANGES_API_KEY;
   const [metaData, setMetaData] = useState([]);
   const exchangeData = [
     { id: 270, name: 'binance', rank: 1 },
@@ -26,108 +27,48 @@ const Exchange = () => {
     { id: 1149, name: 'crypto.com', rank: 19 },
     { id: 403, name: 'bitforex', rank: 20 },
   ];
-
   const exchangeId = exchangeData.map((item) => item.id);
+  const sortMetaData = [];
 
   useEffect(() => {
     fetch(`/api/exchange?ids=${exchangeId}`)
       .then((response) => response.json())
       .then((data) => {
-        const sortedMetaData = [...data].sort((a, b) => {
-          return exchangeId.indexOf(a.id[id]) - exchangeId.indexOf(b.id[id]);
-        });
-        setMetaData(sortedMetaData);
-        console.log(sortedMetaData);
+        console.log(data);
+        for (let i = 0; i < data.data.length; i++) {
+          sortMetaData.push(data.data[exchangeId[i]]);
+        }
+        setMetaData(sortMetaData);
       })
       .catch((error) => console.error(error));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const exchanges = [
-  //   { id: 70, name: 'bitstamp', rank: 6 },
-  //   { id: 102, name: 'huobi', rank: 14 },
-  //   { id: 139, name: 'bitflyer', rank: 12 },
-  //   { id: 200, name: 'bithumb', rank: 15 },
-  //   { id: 24, name: 'kraken', rank: 3 },
-  //   { id: 302, name: 'gate.io', rank: 9 },
-  //   { id: 37, name: 'bitfinex', rank: 8 },
-  //   { id: 1149, name: 'crypto.com', rank: 19 },
-  //   { id: 106, name: 'coincheck', rank: 18 },
-  //   { id: 513, name: 'bitget', rank: 10 },
-  //   { id: 294, name: 'okx', rank: 7 },
-  //   { id: 630, name: 'binance.us', rank: 11 },
-  //   { id: 333, name: 'lbank', rank: 13 },
-  //   { id: 544, name: 'mexc', rank: 17 },
-  //   { id: 331, name: 'kucoin', rank: 4 },
-  //   { id: 89, name: 'coinbase', rank: 2 },
-  //   { id: 270, name: 'binance', rank: 1 },
-  //   { id: 521, name: 'bybit', rank: 5 },
-  //   { id: 403, name: 'bitforex', rank: 20 },
-  //   { id: 151, name: 'gemini', rank: 16 },
-  // ];
+  console.log(metaData);
 
-  // const sortedExchanges = [...exchanges].sort((a, b) => {
-  //   return exchangeId.indexOf(a.id) - exchangeId.indexOf(b.id);
-  // });
-
-  // console.log(sortedExchanges);
+  if (!metaData) {
+    return (
+      <h1 className='text-slate-800 font-semibold text-center'>Loading...</h1>
+    );
+  }
 
   return (
-    <div>
-      <div className='relative overflow-x-auto'>
-        <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-          <thead className='text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400'>
-            <tr>
-              <th scope='col' className='px-6 py-3'>
-                Exchanges
-              </th>
-              <th scope='col' className='px-6 py-3'>
-                24h Trade Volume
-              </th>
-              <th scope='col' className='px-6 py-3'>
-                Markets
-              </th>
-              <th scope='col' className='px-6 py-3'>
-                Change
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-              <th
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
-              >
-                Apple MacBook Pro 17
-              </th>
-              <td className='px-6 py-4'>Silver</td>
-              <td className='px-6 py-4'>Laptop</td>
-              <td className='px-6 py-4'>$2999</td>
-            </tr>
-            <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-              <th
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
-              >
-                Microsoft Surface Pro
-              </th>
-              <td className='px-6 py-4'>White</td>
-              <td className='px-6 py-4'>Laptop PC</td>
-              <td className='px-6 py-4'>$1999</td>
-            </tr>
-            <tr className='bg-white dark:bg-gray-800'>
-              <th
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
-              >
-                Magic Mouse 2
-              </th>
-              <td className='px-6 py-4'>Black</td>
-              <td className='px-6 py-4'>Accessories</td>
-              <td className='px-6 py-4'>$99</td>
-            </tr>
-          </tbody>
-        </table>
+    <div className='w-full'>
+      <div className='flex flex-col w-full'>
+        {metaData.length &&
+          metaData.map((item, index) => {
+            return (
+              <ExchangeDetails
+                name={item.name}
+                volume={millify(item.spot_volume_usd)}
+                weeklyVisits={item.weekly_visits}
+                rank={exchangeData[index].rank}
+                description={item.description}
+                key={item.id}
+                id={item.id}
+              />
+            );
+          })}
       </div>
     </div>
   );
