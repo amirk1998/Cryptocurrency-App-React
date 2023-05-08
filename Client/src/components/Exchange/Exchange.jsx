@@ -30,7 +30,7 @@ const Exchange = () => {
   const exchangeId = exchangeData.map((item) => item.id);
 
   useEffect(() => {
-    fetch(`/api/exchange?ids=${exchangeId}`)
+    fetch(`/api/exchange?id=${exchangeId}`)
       .then((response) => response.json())
       .then((data) => {
         const sortedMetaData = [...data].sort((a, b) => {

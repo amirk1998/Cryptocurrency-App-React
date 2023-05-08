@@ -11,8 +11,8 @@ const apiKey = process.env.API_KEY;
 app.use(cors());
 
 app.get('/api/exchange', async (req, res) => {
-  const ids = req.query.ids;
-  const idArray = Array.isArray(ids) ? ids : [ids]; // convert to array if single ID provided
+  const id = req.query.id;
+  const idArray = Array.isArray(id) ? id : [id]; // convert to array if single ID provided
   const url = `https://pro-api.coinmarketcap.com/v1/exchange/info?id=${idArray.join(
     ','
   )}`;
