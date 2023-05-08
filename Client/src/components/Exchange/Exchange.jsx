@@ -30,7 +30,7 @@ const Exchange = () => {
   const exchangeId = exchangeData.map((item) => item.id);
 
   useEffect(() => {
-    fetch(`/api/exchange?id=${exchangeId}`)
+    fetch(`/api/exchange?ids=${exchangeId}`)
       .then((response) => response.json())
       .then((data) => {
         const sortedMetaData = [...data].sort((a, b) => {
@@ -43,34 +43,34 @@ const Exchange = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const exchanges = [
-    { id: 70, name: 'bitstamp', rank: 6 },
-    { id: 102, name: 'huobi', rank: 14 },
-    { id: 139, name: 'bitflyer', rank: 12 },
-    { id: 200, name: 'bithumb', rank: 15 },
-    { id: 24, name: 'kraken', rank: 3 },
-    { id: 302, name: 'gate.io', rank: 9 },
-    { id: 37, name: 'bitfinex', rank: 8 },
-    { id: 1149, name: 'crypto.com', rank: 19 },
-    { id: 106, name: 'coincheck', rank: 18 },
-    { id: 513, name: 'bitget', rank: 10 },
-    { id: 294, name: 'okx', rank: 7 },
-    { id: 630, name: 'binance.us', rank: 11 },
-    { id: 333, name: 'lbank', rank: 13 },
-    { id: 544, name: 'mexc', rank: 17 },
-    { id: 331, name: 'kucoin', rank: 4 },
-    { id: 89, name: 'coinbase', rank: 2 },
-    { id: 270, name: 'binance', rank: 1 },
-    { id: 521, name: 'bybit', rank: 5 },
-    { id: 403, name: 'bitforex', rank: 20 },
-    { id: 151, name: 'gemini', rank: 16 },
-  ];
+  // const exchanges = [
+  //   { id: 70, name: 'bitstamp', rank: 6 },
+  //   { id: 102, name: 'huobi', rank: 14 },
+  //   { id: 139, name: 'bitflyer', rank: 12 },
+  //   { id: 200, name: 'bithumb', rank: 15 },
+  //   { id: 24, name: 'kraken', rank: 3 },
+  //   { id: 302, name: 'gate.io', rank: 9 },
+  //   { id: 37, name: 'bitfinex', rank: 8 },
+  //   { id: 1149, name: 'crypto.com', rank: 19 },
+  //   { id: 106, name: 'coincheck', rank: 18 },
+  //   { id: 513, name: 'bitget', rank: 10 },
+  //   { id: 294, name: 'okx', rank: 7 },
+  //   { id: 630, name: 'binance.us', rank: 11 },
+  //   { id: 333, name: 'lbank', rank: 13 },
+  //   { id: 544, name: 'mexc', rank: 17 },
+  //   { id: 331, name: 'kucoin', rank: 4 },
+  //   { id: 89, name: 'coinbase', rank: 2 },
+  //   { id: 270, name: 'binance', rank: 1 },
+  //   { id: 521, name: 'bybit', rank: 5 },
+  //   { id: 403, name: 'bitforex', rank: 20 },
+  //   { id: 151, name: 'gemini', rank: 16 },
+  // ];
 
-  const sortedExchanges = [...exchanges].sort((a, b) => {
-    return exchangeId.indexOf(a.id) - exchangeId.indexOf(b.id);
-  });
+  // const sortedExchanges = [...exchanges].sort((a, b) => {
+  //   return exchangeId.indexOf(a.id) - exchangeId.indexOf(b.id);
+  // });
 
-  console.log(sortedExchanges);
+  // console.log(sortedExchanges);
 
   return (
     <div>
