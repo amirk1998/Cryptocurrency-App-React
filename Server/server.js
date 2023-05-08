@@ -25,7 +25,7 @@ app.get('/api/exchange', async (req, res) => {
     res.send(response.data);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error getting exchange metadata');
+    res.status(500).send('Error getting Exchange Metadata');
   }
 });
 
