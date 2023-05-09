@@ -34,13 +34,11 @@ const Exchange = () => {
       );
       return { icon: icon, data: item };
     });
-  // console.log(exchangesData);
 
   const filteredData =
     exchangesData &&
-    exchangesData.filter(
-      (item) => exchangesName.includes(item.data.exchange_id)
-      // console.log(item)
+    exchangesData.filter((item) =>
+      exchangesName.includes(item.data.exchange_id)
     );
   console.log(filteredData);
 
