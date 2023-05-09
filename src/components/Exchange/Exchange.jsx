@@ -1,23 +1,53 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import {
+  useGetExchangesQuery,
+  useGetIconsQuery,
+} from '../../services/cryptoExchangesApi';
 
 const Exchange = () => {
-  const apiKey = import.meta.env.VITE_CRYPTO_EXCHANGES_API_KEY;
-  const [exchangeData, setExchangeData] = useState({});
+  const { data: exchangeIcons } = useGetIconsQuery();
+  const { data: exchangesDetails } = useGetExchangesQuery();
 
-  // const fetchExchangesData = async (id) => {
-  //   const url = `/api/v1/exchange/info?id=${id}&CMC_PRO_API_KEY=${apiKey}`;
-  //   try {
-  //     const response = await axios.get(url);
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const exchangesName = [
+    'BINANCE',
+    'COINBASE',
+    'KRAKEN',
+    'KUCOIN',
+    'BYBIT',
+    'BITSTAMP',
+    'OKX',
+    'BITFINEX',
+    'GATE.IO',
+    'BITGET',
+    'BINANCE.US',
+    'BITFLYER',
+    'LBANK',
+    'HUOBI',
+    'BITHUMB',
+    'GEMINI',
+    'MEXC',
+    'COINCHECK',
+    'BITFOREX',
+  ];
 
-  // useEffect(() => {
-  //   fetchExchangesData(270);
-  // }, []);
+  const exchangesData =
+    exchangesDetails &&
+    exchangesDetails.map((item) => {
+      const icon = exchangeIcons.find(
+        (icon) => icon.exchange_id === item.exchange_id
+      );
+      return { icon: icon, data: item };
+    });
+  // console.log(exchangesData);
+
+  const filteredData =
+    exchangesData &&
+    exchangesData.filter((item) =>
+      exchangesName.includes(item.data.name.toUpperCase())
+    );
+  console.log(filteredData);
+
+  // console.log(exchangesName);
 
   return (
     <div>
@@ -32,10 +62,10 @@ const Exchange = () => {
                 24h Trade Volume
               </th>
               <th scope='col' className='px-6 py-3'>
-                Markets
+                1h Trade Volume
               </th>
               <th scope='col' className='px-6 py-3'>
-                Change
+                Total Symbols
               </th>
             </tr>
           </thead>

@@ -1,33 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const cryptoExchangesApiHeaders = {
-  'X-CMC_PRO_API_KEY': import.meta.env.VITE_CRYPTO_EXCHANGES_API_KEY,
-  'Content-Type': 'application/json',
+  'X-CoinAPI-Key': import.meta.env.VITE_CRYPTO_EXCHANGES_API_KEY,
+  'X-CoinAPI-Host': 'rest.coinapi.io',
 };
 
-const baseUrl = 'https://pro-api.coinmarketcap.com';
+const baseUrl = 'https://rest.coinapi.io';
 
 const createRequest = (url) => ({ url, headers: cryptoExchangesApiHeaders });
 
 export const cryptoExchangesApi = createApi({
   reducerPath: 'cryptoExchangesApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl,
-    prepareHeaders: (headers) => {
-      headers.set('Content-Type', 'application/json');
-      headers.set(
-        'X-CMC_PRO_API_KEY',
-        import.meta.env.VITE_CRYPTO_EXCHANGES_API_KEY
-      );
-      return headers;
-    },
-    mode: 'cors',
-  }),
+  baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
     getExchanges: builder.query({
-      query: (id) => createRequest(`/v1/exchange/info?&id=${id}`),
+      query: () => createRequest(`/v1/exchanges`),
+    }),
+    getIcons: builder.query({
+      query: () => createRequest(`/v1/exchanges/icons/64`),
     }),
   }),
 });
 
-export const { useGetExchangesQuery } = cryptoExchangesApi;
+export const { useGetExchangesQuery, useGetIconsQuery } = cryptoExchangesApi;
