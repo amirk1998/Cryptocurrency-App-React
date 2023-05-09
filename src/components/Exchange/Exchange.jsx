@@ -3,6 +3,7 @@ import {
   useGetExchangesQuery,
   useGetIconsQuery,
 } from '../../services/cryptoExchangesApi';
+import millify from 'millify';
 
 const Exchange = () => {
   const { data: exchangeIcons } = useGetIconsQuery();
@@ -13,20 +14,15 @@ const Exchange = () => {
     'COINBASE',
     'KRAKEN',
     'KUCOIN',
-    'BYBIT',
     'BITSTAMP',
     'OKX',
     'BITFINEX',
-    'GATE.IO',
     'BITGET',
     'BINANCE.US',
-    'BITFLYER',
     'LBANK',
-    'HUOBI',
     'BITHUMB',
     'GEMINI',
     'MEXC',
-    'COINCHECK',
     'BITFOREX',
   ];
 
@@ -42,18 +38,17 @@ const Exchange = () => {
 
   const filteredData =
     exchangesData &&
-    exchangesData.filter((item) =>
-      exchangesName.includes(item.data.name.toUpperCase())
+    exchangesData.filter(
+      (item) => exchangesName.includes(item.data.exchange_id)
+      // console.log(item)
     );
   console.log(filteredData);
-
-  // console.log(exchangesName);
 
   return (
     <div>
       <div className='relative overflow-x-auto'>
-        <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-          <thead className='text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400'>
+        <table className='w-full text-base text-left text-gray-500 rounded-xl'>
+          <thead className='text-xs text-gray-700 uppercase bg-gray-200 '>
             <tr>
               <th scope='col' className='px-6 py-3'>
                 Exchanges
@@ -70,39 +65,47 @@ const Exchange = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-              <th
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
-              >
-                Apple MacBook Pro 17
-              </th>
-              <td className='px-6 py-4'>Silver</td>
-              <td className='px-6 py-4'>Laptop</td>
-              <td className='px-6 py-4'>$2999</td>
-            </tr>
-            <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-              <th
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
-              >
-                Microsoft Surface Pro
-              </th>
-              <td className='px-6 py-4'>White</td>
-              <td className='px-6 py-4'>Laptop PC</td>
-              <td className='px-6 py-4'>$1999</td>
-            </tr>
-            <tr className='bg-white dark:bg-gray-800'>
-              <th
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
-              >
-                Magic Mouse 2
-              </th>
-              <td className='px-6 py-4'>Black</td>
-              <td className='px-6 py-4'>Accessories</td>
-              <td className='px-6 py-4'>$99</td>
-            </tr>
+            {filteredData &&
+              filteredData.map((exchange, index) => {
+                return (
+                  <tr
+                    key={exchange.data.exchange_id}
+                    scope='row'
+                    className='bg-slate-100 hover:bg-slate-200 text-slate-800 border-b '
+                  >
+                    <td className='flex items-center'>
+                      <span className='px-6 py-4'>{index + 1}.</span>
+
+                      <img
+                        className='w-8 h-8 mr-2'
+                        src={exchange.icon.url}
+                        alt={exchange.icon.exchange_id}
+                      />
+
+                      <span className='px-2 py-4 font-semibold text-slate-800 text-lg'>
+                        {exchange.data.name}
+                      </span>
+                    </td>
+                    <td className='px-6 py-4'>
+                      $
+                      {millify(exchange.data.volume_1day_usd, {
+                        precision: 2,
+                        space: true,
+                      })}
+                    </td>
+                    <td className='px-6 py-4'>
+                      $
+                      {millify(exchange.data.volume_1hrs_usd, {
+                        precision: 2,
+                        space: true,
+                      })}
+                    </td>
+                    <td className='px-6 py-4'>
+                      {exchange.data.data_symbols_count}
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
